@@ -3,56 +3,100 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>blurryspot | Ethereal Audio</title>
+    <title>blurryspot | 数字音景实验室</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="grain-overlay"></div>
 
     <nav>
-        <div class="brand">blurryspot_</div>
-        <div class="menu">
-            <a href="https://y.music.163.com/m/user?id=你的ID" target="_blank">163 MUSIC</a>
+        <div class="nav-brand">blurryspot_</div>
+        <div class="nav-links">
+            <a href="https://music.163.com/#/user/home?id=你的ID" target="_blank">163 MUSIC</a>
+            <a href="#projects">ARCHIVE</a>
         </div>
     </nav>
 
     <main>
         <section class="hero">
-            <div class="visual-core">
-                <div class="avatar-wrapper">
-                    <img src="b6d064695e6b23517263f7f5c76f6d66.jpg" alt="avatar" class="avatar-img">
-                </div>
-                <div class="liquid-shape"></div>
+            <div class="visual-engine">
+                <a href="https://music.163.com/#/user/home?id=你的ID" target="_blank" class="avatar-link">
+                    <div class="avatar-capsule">
+                        <img src="avatar.png" alt="blurryspot" class="avatar-img">
+                    </div>
+                </a>
+                <div class="liquid-glow"></div>
             </div>
 
-            <div class="text-core">
-                <div class="intro-line">
-                    <span id="typing"></span>
+            <div class="content-engine">
+                <div class="highlight">
+                    <span id="typing"></span><span class="cursor">_</span>
                 </div>
-                <h1 class="main-title">混音，是捕捉<br><span class="blue-text">失焦的瞬间</span></h1>
-                <p class="description">独立音乐人 / 音频后期 / 擅长用 FL Studio, FabFilter 与 SoundToys 勾勒情绪。</p>
+                <h1 class="hero-title">捕捉<span class="blue-italic">失焦</span>的声音。</h1>
+                <p class="hero-sub">独立音乐人 / 音频后期实习生申请</p>
+                <p class="hero-bio">擅长使用 FL Studio 架构空间，通过 FabFilter 与 SoundToys 雕琢音色质感。</p>
             </div>
         </section>
 
-        <section class="player-section">
-            <div class="player-card">
-                <div class="track-info">
-                    <span class="label">CURRENT VIBE</span>
-                    <span class="track-name">未命名音轨.mp3</span>
+        <div class="marquee">
+            <div class="marquee-track">
+                <span>FL STUDIO 24 / FABFILTER PRO-Q3 / SOUNDTOYS ECHOBOY / MASTERING WORKFLOW / VINTAGE TEXTURE / </span>
+                <span>FL STUDIO 24 / FABFILTER PRO-Q3 / SOUNDTOYS ECHOBOY / MASTERING WORKFLOW / VINTAGE TEXTURE / </span>
+            </div>
+        </div>
+
+        <section id="projects" class="projects">
+            <div class="glass-player">
+                <div class="player-header">
+                    <div class="status-box">
+                        <span class="dot"></span> LIVE SIGNAL
+                    </div>
+                    <span class="track-display">WAITING FOR INPUT...</span>
                 </div>
-                <div class="audio-ui">
-                    <audio id="main-player" controls></audio>
-                </div>
-                <div class="upload-trigger">
-                    <input type="file" id="audio-upload" hidden>
-                    <label for="audio-upload" class="upload-label">
-                        <span class="plus-icon">+</span> 载入你的声音碎片
+                
+                <audio id="main-audio" controls></audio>
+
+                <div class="upload-area">
+                    <input type="file" id="audio-input" accept="audio/*" hidden>
+                    <label for="audio-input" class="upload-btn">
+                        <span>+</span> 载入声音碎片 (UPLOAD)
                     </label>
+                </div>
+
+                <div class="legal-notice">
+                    © 2026 blurryspot. 所有演示作品受版权保护。
                 </div>
             </div>
         </section>
     </main>
 
-    <script src="script.js"></script>
+    <script>
+        // 1. 打字机效果
+        const text = "Hi I'm Blurryspot";
+        let i = 0;
+        function typeWriter() {
+            if (i < text.length) {
+                document.getElementById("typing").innerHTML += text.charAt(i);
+                i++;
+                setTimeout(typeWriter, 120);
+            }
+        }
+        window.onload = typeWriter;
+
+        // 2. 音频上传实时预览
+        const input = document.getElementById('audio-input');
+        const audio = document.getElementById('main-audio');
+        const display = document.querySelector('.track-display');
+
+        input.addEventListener('change', function() {
+            const file = this.files[0];
+            if(file) {
+                const url = URL.createObjectURL(file);
+                audio.src = url;
+                display.innerText = file.name.toUpperCase();
+                audio.play();
+            }
+        });
+    </script>
 </body>
 </html>
