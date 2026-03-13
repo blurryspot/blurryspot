@@ -1,34 +1,52 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. 打字机效果实现
-    const text = "Hi I'm Blurryspot";
-    const speed = 100;
-    let i = 0;
+    const uploadBtn = document.getElementById('upload-btn');
+    const uploadInput = document.getElementById('upload-input');
+    const audioContainer = document.getElementById('audio-container');
 
-    function typeWriter() {
-        if (i < text.length) {
-            document.getElementById("typing-text").innerHTML += text.charAt(i);
-            i++;
-            setTimeout(typeWriter, speed);
-        }
-    }
-    typeWriter();
-
-    // 2. 鼠标跟随的微弱光影 (增加互动感)
-    const follower = document.querySelector('.cursor-follower');
-    document.addEventListener('mousemove', (e) => {
-        gsap.to(follower, {
-            x: e.clientX,
-            y: e.clientY,
-            duration: 0.5
-        });
+    // 1. 点击炫酷按钮，触发隐藏的上传表单
+    uploadBtn.addEventListener('click', () => {
+        uploadInput.click();
     });
 
-    // 3. 上传功能保持原有逻辑并增加成功提示
-    const uploadInput = document.getElementById('upload-input');
-    uploadInput.addEventListener('change', function(e) {
-        if(this.files[0]) {
-            alert("文件已装载：进入 blurryspot 混音模拟环境...");
-            // 此处复用之前的音频卡片生成逻辑
+    // 2. 监听到文件选择后的处理逻辑
+    uploadInput.addEventListener('change', function(event) {
+        const file = event.target.files[0];
+        
+        if (file) {
+            // 生成本地的临时URL，用于前端立刻播放
+            const objectURL = URL.createObjectURL(file);
+            
+            // 创建新的音频卡片 DOM 元素
+            const newTrack = document.createElement('div');
+            newTrack.className = 'audio-track';
+            
+            // 初始状态透明，用于实现顺滑出现的动画
+            newTrack.style.opacity = '0';
+            newTrack.style.transform = 'translateY(20px)';
+            newTrack.style.transition = 'all 0.5s ease';
+
+            newTrack.innerHTML = `
+                <div class="track-info">
+                    <span class="track-name">🎵 ${file.name}</span>
+                    <span class="track-tag" style="background: var(--accent-pink);">NEW UPLOAD</span>
+                </div>
+                <audio controls autoplay>
+                    <source src="${objectURL}" type="${file.type}">
+                    Your browser does not support the audio element.
+                </audio>
+            `;
+
+            // 将新音轨插入到列表顶部
+            audioContainer.prepend(newTrack);
+
+            // 稍微延迟触发动画，让浏览器有时间渲染DOM
+            setTimeout(() => {
+                newTrack.style.opacity = '1';
+                newTrack.style.transform = 'translateY(0)';
+            }, 50);
+
+            // 清空input，保证下次同名文件也能触发change事件
+            this.value = '';
         }
     });
 });
