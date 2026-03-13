@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>blurryspot | 音频后期实习生</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav>
+        <div class="logo">blurryspot_</div>
+        <ul class="nav-links">
+            <li><a href="#about">ABOUT</a></li>
+            <li><a href="#skills">SKILLS</a></li>
+            <li><a href="#works">TRACKS</a></li>
+        </ul>
+    </nav>
+
+    <section id="about" class="hero">
+        <div class="abstract-bg">
+            <div class="blob blob-1"></div>
+            <div class="blob blob-2"></div>
+            <div class="grid-overlay"></div>
+        </div>
+        
+        <div class="hero-content">
+            <div class="tag">AUDIO POST-PRODUCTION INTERN</div>
+            <h1 class="glitch" data-text="blurryspot">blurryspot</h1>
+            <p class="subtitle">独立音乐人 / 捕捉千禧世代的声音碎片。</p>
+        </div>
+    </section>
+
+    <div class="marquee-container">
+        <div class="marquee">
+            <span>FL STUDIO 熟练运用 • FABFILTER (肥波) 混音 • SOUNDTOYS 声音塑形 • AI 视听工具前沿应用 • 母带处理 • </span>
+            <span>FL STUDIO 熟练运用 • FABFILTER (肥波) 混音 • SOUNDTOYS 声音塑形 • AI 视听工具前沿应用 • 母带处理 • </span>
+        </div>
+    </div>
+
+    <section id="skills" class="skills-section">
+        <h2 class="section-title">GEARS & SKILLS</h2>
+        <div class="cards">
+            <div class="card">
+                <div class="card-icon">💻</div>
+                <h3>核心 DAW</h3>
+                <p>极度熟练运用 <strong>FL Studio</strong>，无论编曲构思还是音频编辑，都能迅速将抽象灵感转化为具体声场。</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🎛️</div>
+                <h3>混音与母带</h3>
+                <p>精通 <strong>FabFilter (肥波)</strong> 极其精确的 EQ 与动态控制，结合 <strong>SoundToys</strong> 创造极具色彩与亚文化质感的复古/迷幻空间。</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🤖</div>
+                <h3>AI 视听赋能</h3>
+                <p>深度掌握前沿的 <strong>AI 音频与视频处理工具</strong>，能大幅提升人声修复、降噪隔离及视听后期合成的工作效率。</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="works" class="works-section">
+        <h2 class="section-title">VIBE CHECK (作品集)</h2>
+        
+        <div class="audio-container" id="audio-container">
+            <div class="audio-track">
+                <div class="track-info">
+                    <span class="track-name">Demo 01 - 霓虹失真 (Neon Distortion)</span>
+                    <span class="track-tag">Mixed & Mastered</span>
+                </div>
+                <audio controls>
+                    <source src="#" type="audio/mpeg">
+                </audio>
+            </div>
+        </div>
+
+        <div class="upload-area">
+            <input type="file" id="upload-input" accept="audio/*" style="display: none;">
+            <button id="upload-btn" class="y2k-btn">
+                <span class="btn-text">+ 上传新音频 (UPLOAD)</span>
+            </button>
+            <p class="upload-note">*纯前端演示：点击上传本地音频，即刻在页面生成波形播放器体验。</p>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 blurryspot. All vibes reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

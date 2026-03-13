@@ -1,0 +1,280 @@
+/* 基础变量设置 */
+:root {
+    --klein-blue: #002FA7;
+    --bg-color: #E8ECEF; /* 偏冷的灰白色背景 */
+    --text-main: #111111;
+    --accent-pink: #FF00FF; /* 少量千禧粉作为点缀 */
+}
+
+html {
+    scroll-behavior: smooth; /* 平滑滚动 */
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Helvetica Neue', 'Arial', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    overflow-x: hidden;
+}
+
+/* 导航栏：Y2K毛玻璃效果 */
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 50px;
+    box-sizing: border-box;
+    background: rgba(232, 236, 239, 0.7);
+    backdrop-filter: blur(10px);
+    border-bottom: 2px solid var(--text-main);
+    z-index: 1000;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: var(--klein-blue);
+    letter-spacing: -1px;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-main);
+    font-weight: 800;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: var(--klein-blue);
+}
+
+/* 首页：克莱因蓝抽象动画 */
+.hero {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.abstract-bg {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: 0;
+}
+
+.blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.8;
+}
+
+.blob-1 {
+    width: 400px; height: 400px;
+    background: var(--klein-blue);
+    top: 20%; left: 15%;
+    animation: float 8s ease-in-out infinite alternate;
+}
+
+.blob-2 {
+    width: 300px; height: 300px;
+    background: var(--accent-pink);
+    bottom: 10%; right: 20%;
+    opacity: 0.4;
+    animation: float 10s ease-in-out infinite alternate-reverse;
+}
+
+/* Y2K 像素网格叠加层 */
+.grid-overlay {
+    position: absolute;
+    width: 100%; height: 100%;
+    background-image: radial-gradient(var(--text-main) 1px, transparent 1px);
+    background-size: 20px 20px;
+    opacity: 0.1;
+}
+
+@keyframes float {
+    0% { transform: translateY(0) scale(1); }
+    100% { transform: translateY(-50px) scale(1.1); }
+}
+
+.hero-content {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+}
+
+.tag {
+    display: inline-block;
+    border: 2px solid var(--text-main);
+    border-radius: 50px;
+    padding: 8px 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    background: white;
+    margin-bottom: 20px;
+    box-shadow: 3px 3px 0 var(--text-main);
+}
+
+.glitch {
+    font-size: 6rem;
+    font-weight: 900;
+    color: var(--klein-blue);
+    margin: 0;
+    letter-spacing: -3px;
+    text-transform: lowercase;
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+/* 跑马灯效果 */
+.marquee-container {
+    background-color: var(--klein-blue);
+    color: white;
+    padding: 15px 0;
+    border-top: 3px solid var(--text-main);
+    border-bottom: 3px solid var(--text-main);
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.marquee {
+    display: inline-block;
+    font-weight: bold;
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+    animation: scrollText 20s linear infinite;
+}
+
+.marquee span { padding-right: 50px; }
+
+@keyframes scrollText {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+/* 通用区块样式 */
+section { padding: 100px 50px; }
+.section-title {
+    font-size: 2.5rem;
+    color: var(--klein-blue);
+    text-align: center;
+    margin-bottom: 50px;
+    font-weight: 900;
+    text-shadow: 2px 2px 0px rgba(0,0,0,0.1);
+}
+
+/* 技能卡片（Y2K 卡通粗线风格） */
+.cards {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.card {
+    background: white;
+    border: 3px solid var(--text-main);
+    border-radius: 20px;
+    padding: 30px;
+    width: 300px;
+    box-shadow: 8px 8px 0 var(--klein-blue);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.card:hover {
+    transform: translate(-5px, -5px);
+    box-shadow: 13px 13px 0 var(--klein-blue);
+}
+
+.card-icon { font-size: 2.5rem; margin-bottom: 15px; }
+.card h3 { margin: 0 0 15px 0; font-size: 1.5rem; border-bottom: 2px solid var(--bg-color); padding-bottom: 10px;}
+.card p { line-height: 1.6; font-size: 0.95rem; }
+
+/* 作品集与上传 */
+.works-section { background-color: #ffffff; border-top: 3px solid var(--text-main); }
+.audio-container {
+    max-width: 700px;
+    margin: 0 auto 40px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.audio-track {
+    border: 2px solid var(--text-main);
+    border-radius: 15px;
+    padding: 20px;
+    background: var(--bg-color);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    box-shadow: 4px 4px 0 rgba(0,0,0,0.05);
+}
+
+.track-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+}
+
+.track-tag {
+    font-size: 0.7rem;
+    background: var(--klein-blue);
+    color: white;
+    padding: 3px 8px;
+    border-radius: 10px;
+}
+
+audio { width: 100%; outline: none; border-radius: 50px;}
+
+.upload-area { text-align: center; margin-top: 50px; }
+
+.y2k-btn {
+    background-color: var(--accent-pink);
+    color: white;
+    border: 3px solid var(--text-main);
+    padding: 15px 40px;
+    font-size: 1.2rem;
+    font-weight: 900;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 6px 6px 0 var(--text-main);
+    transition: all 0.1s ease;
+}
+
+.y2k-btn:active {
+    transform: translate(4px, 4px);
+    box-shadow: 2px 2px 0 var(--text-main);
+}
+
+.upload-note { font-size: 0.85rem; color: #666; margin-top: 15px; }
+
+footer {
+    text-align: center;
+    padding: 30px;
+    background: var(--text-main);
+    color: white;
+    font-weight: bold;
+}
