@@ -1,1 +1,1 @@
-# blurryspot-portfolio
+# blurryspot
