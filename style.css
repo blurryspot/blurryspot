@@ -1,129 +1,235 @@
+/* 变量定义 */
 :root {
-    --k-blue: #002FA7;
-    --soft-white: #f4f4f4;
-    --deep-gray: #1a1a1a;
+    --k-blue: #002FA7; /* 克莱因蓝 */
+    --void-black: #080808;
+    --soft-gray: #a0a0a0;
+    --text-white: #f5f5f5;
 }
+
+* { box-sizing: border-box; }
 
 body {
     margin: 0;
-    background: #0a0a0a;
-    color: var(--soft-white);
-    font-family: 'Optima', 'Baskerville', 'STSong', serif; /* 衬线体更文艺 */
+    padding: 0;
+    background-color: var(--void-black);
+    color: var(--text-white);
+    font-family: "Optima", "Baskerville", "STSong", serif;
     overflow-x: hidden;
 }
 
-/* 噪点质感 */
+/* 噪点背景纹理 */
 .grain-overlay {
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
-    background: url('https://files.catbox.moe/p5xsnx.png'); /* 一个微弱的噪点图 */
-    opacity: 0.04;
+    background-image: url('https://files.catbox.moe/p5xsnx.png'); 
+    opacity: 0.05;
     pointer-events: none;
-    z-index: 999;
+    z-index: 100;
 }
 
+/* 导航栏 */
 nav {
     display: flex;
     justify-content: space-between;
     padding: 40px;
-    font-family: 'Courier New', monospace;
-    font-size: 0.8rem;
-    letter-spacing: 2px;
+    position: fixed;
+    width: 100%;
+    z-index: 50;
+    mix-blend-mode: difference;
 }
 
+.nav-brand {
+    font-family: monospace;
+    letter-spacing: 2px;
+    font-weight: bold;
+}
+
+.nav-links a {
+    color: var(--text-white);
+    text-decoration: none;
+    margin-left: 30px;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    border-bottom: 1px solid transparent;
+    transition: 0.3s;
+}
+
+.nav-links a:hover { border-bottom: 1px solid var(--k-blue); }
+
+/* 核心展示区 */
 .hero {
-    height: 80vh;
+    height: 100vh;
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
-    text-align: center;
+    align-items: center;
+    padding: 0 20px;
 }
 
-/* 头像：作为模糊的核心光源 */
-.visual-core {
+/* 头像与液态光影 */
+.visual-engine {
     position: relative;
-    margin-bottom: 50px;
+    margin-bottom: 40px;
 }
 
-.avatar-wrapper {
-    width: 220px;
-    height: 220px;
+.avatar-capsule {
+    width: 200px;
+    height: 200px;
     border-radius: 50%;
     overflow: hidden;
+    z-index: 5;
     position: relative;
-    z-index: 2;
-    border: 0.5px solid rgba(255,255,255,0.2);
-    box-shadow: 0 0 60px rgba(0, 47, 167, 0.4);
+    border: 1px solid rgba(255,255,255,0.1);
+    box-shadow: 0 0 40px rgba(0, 47, 167, 0.3);
 }
 
 .avatar-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    filter: saturate(1.2);
-    transition: transform 1s cubic-bezier(0.2, 0, 0.2, 1);
+    transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.avatar-wrapper:hover .avatar-img {
-    transform: scale(1.1) rotate(2deg);
+.avatar-link:hover .avatar-img {
+    transform: scale(1.1) rotate(3deg);
 }
 
-/* 液态抽象背景：在头像后方律动 */
-.liquid-shape {
+.liquid-glow {
     position: absolute;
     top: 50%; left: 50%;
-    width: 300px; height: 300px;
+    width: 280px; height: 280px;
     background: var(--k-blue);
-    filter: blur(80px);
+    filter: blur(70px);
     z-index: 1;
-    border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
     transform: translate(-50%, -50%);
-    animation: morph 10s infinite alternate;
+    border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+    animation: morphing 12s infinite alternate ease-in-out;
+    opacity: 0.6;
 }
 
-@keyframes morph {
+@keyframes morphing {
     0% { border-radius: 40% 60% 70% 30% / 40% 40% 60% 50%; }
     100% { border-radius: 70% 30% 50% 50% / 30% 30% 70% 70%; }
 }
 
-.main-title {
-    font-size: 3.5rem;
-    line-height: 1.2;
-    font-weight: 300;
-    margin: 20px 0;
+/* 文字区域 */
+.content-engine { text-align: center; }
+
+.highlight {
+    font-family: monospace;
+    color: var(--k-blue);
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    letter-spacing: 4px;
 }
 
-.blue-text {
+.hero-title {
+    font-size: 3rem;
+    font-weight: 300;
+    margin: 10px 0;
+    letter-spacing: -1px;
+}
+
+.blue-italic {
     color: var(--k-blue);
     font-style: italic;
-    text-shadow: 0 0 20px rgba(0, 47, 167, 0.5);
+    text-shadow: 0 0 20px rgba(0, 47, 167, 0.4);
 }
 
-/* 播放器卡片：玻璃拟态 */
-.player-card {
+.hero-sub {
+    font-size: 1rem;
+    color: var(--soft-gray);
+    margin-bottom: 20px;
+}
+
+.hero-bio {
     max-width: 500px;
+    font-size: 0.9rem;
+    line-height: 1.8;
+    opacity: 0.7;
+}
+
+/* 跑马灯 */
+.marquee {
+    background: var(--k-blue);
+    padding: 12px 0;
+    border-y: 1px solid rgba(255,255,255,0.2);
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.marquee-track {
+    display: inline-block;
+    font-family: monospace;
+    font-size: 0.75rem;
+    font-weight: bold;
+    animation: scroll 25s linear infinite;
+}
+
+@keyframes scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+}
+
+/* 播放器区域 */
+.projects { padding: 100px 20px; }
+
+.glass-player {
+    max-width: 600px;
     margin: 0 auto;
-    background: rgba(255,255,255,0.03);
+    background: rgba(255, 255, 255, 0.03);
     backdrop-filter: blur(20px);
-    padding: 30px;
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 2px; /* 方正比圆润更文艺 */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 40px;
+    text-align: center;
 }
 
-.upload-label {
-    margin-top: 20px;
-    display: block;
+.player-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    font-family: monospace;
     font-size: 0.7rem;
-    letter-spacing: 3px;
-    cursor: pointer;
-    opacity: 0.5;
-    transition: 0.3s;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding-bottom: 15px;
 }
 
-.upload-label:hover {
-    opacity: 1;
-    color: var(--k-blue);
+.dot {
+    display: inline-block;
+    width: 6px; height: 6px;
+    background: #00ff00;
+    border-radius: 50%;
+    margin-right: 5px;
+    box-shadow: 0 0 8px #00ff00;
+}
+
+audio {
+    width: 100%;
+    filter: invert(1); /* 使默认播放器适应深色模式 */
+    margin-bottom: 30px;
+}
+
+.upload-btn {
+    display: inline-block;
+    border: 1px solid var(--k-blue);
+    padding: 12px 30px;
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: 0.4s;
+}
+
+.upload-btn:hover {
+    background: var(--k-blue);
+    box-shadow: 0 0 20px var(--k-blue);
+}
+
+.legal-notice {
+    margin-top: 40px;
+    font-size: 0.6rem;
+    opacity: 0.4;
+    letter-spacing: 1px;
 }
     color: white;
     font-weight: bold;
