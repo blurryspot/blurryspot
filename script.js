@@ -1,44 +1,47 @@
-// 1. 打字机效果增强：支持多行或循环
-const text = "Hi, I'm Blurryspot.";
+// 1. 增强型打字机逻辑
+const introText = "Initializing session... Accessing blurryspot database...";
 let i = 0;
+const typingTarget = document.getElementById("typing");
+
 function typeWriter() {
-    if (i < text.length) {
-        document.getElementById("typing").innerHTML += text.charAt(i);
+    if (i < introText.length) {
+        typingTarget.innerHTML += introText.charAt(i);
         i++;
-        setTimeout(typeWriter, 100);
+        // 模拟不均匀的打字速度（更有真人感或旧机器感）
+        const speed = Math.random() * 100 + 50; 
+        setTimeout(typeWriter, speed);
     }
 }
 
-// 2. 鼠标跟随光晕 (Interactive Glow)
-const glow = document.querySelector('.liquid-glow');
-document.addEventListener('mousemove', (e) => {
-    const x = (e.clientX / window.innerWidth - 0.5) * 40; // 偏移幅度
-    const y = (e.clientY / window.innerHeight - 0.5) * 40;
-    glow.style.transform = `translate(${x}px, ${y}px)`;
-});
+// 2. 音频上传与实时状态显示
+const audioUpload = document.getElementById('audio-upload');
+const audioPlayer = document.getElementById('main-audio');
+const trackNameDisplay = document.getElementById('track-name');
+const blobs = document.querySelectorAll('.blob');
 
-// 3. 音频可视化与节奏感 (Visualizer Logic)
-const input = document.getElementById('audio-input');
-const audio = document.getElementById('main-audio');
-const display = document.querySelector('.track-display');
-const avatar = document.querySelector('.avatar-capsule');
-
-input.addEventListener('change', function() {
+audioUpload.addEventListener('change', function() {
     const file = this.files[0];
-    if(file) {
+    if (file) {
         const url = URL.createObjectURL(file);
-        audio.src = url;
-        display.innerText = "CAPTURED: " + file.name.toUpperCase();
-        audio.play();
-        avatar.classList.add('playing');
-        
-        // 如果想更进一步，这里可以加入 Web Audio API 分析频率
-        setupVisualizer(audio);
+        audioPlayer.src = url;
+        trackNameDisplay.innerText = "CAPTURED: " + file.name.toUpperCase();
+        audioPlayer.play();
+
+        // 交互：播放时背景液体流动速度加快，增加动感
+        blobs.forEach(blob => {
+            blob.style.animationDuration = '8s';
+        });
     }
 });
 
-// 当音乐停止时取消动画
-audio.onpause = () => avatar.classList.remove('playing');
-audio.onplay = () => avatar.classList.add('playing');
+// 监听暂停，恢复背景流动速度
+audioPlayer.onpause = () => {
+    blobs.forEach(blob => {
+        blob.style.animationDuration = '20s';
+    });
+};
 
-window.onload = typeWriter;
+// 页面加载完成后启动打字机
+window.onload = () => {
+    typeWriter();
+};
