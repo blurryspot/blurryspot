@@ -8,80 +8,74 @@
     
     <style>
         :root {
-            --bg-color: #0c0c0c;
+            --bg-color: #080808;
             --accent-blue: #4a90e2;
-            --text-main: #f0f0f0;
-            --text-dim: #999;
-            --border: rgba(255, 255, 255, 0.1);
+            --text-main: #f5f5f5;
+            --text-dim: #777;
             --glass: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.08);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             background-color: var(--bg-color);
             color: var(--text-main);
-            font-family: 'Inter', -apple-system, sans-serif;
+            font-family: 'Inter', sans-serif;
             overflow-x: hidden;
             cursor: crosshair;
-            line-height: 1.6;
+            line-height: 1.5;
         }
 
-        /* --- 胶片颗粒感 --- */
+        /* --- 1. 胶片颗粒与背景层 --- */
         .grain-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             background: url('https://grainy-gradients.vercel.app/noise.svg');
-            opacity: 0.05;
+            opacity: 0.07;
             pointer-events: none;
-            z-index: 9999;
+            z-index: 100;
         }
 
-        /* --- 底部液态流动背景 --- */
-        .liquid-container {
+        /* 液体流动背景 (下半部分) */
+        .liquid-floor {
             position: fixed;
-            bottom: -10%;
+            bottom: -15%;
             left: -10%;
             width: 120%;
-            height: 60%;
+            height: 70%;
             z-index: -1;
-            filter: blur(80px);
-            opacity: 0.5;
+            filter: blur(100px);
+            opacity: 0.6;
             pointer-events: none;
         }
 
-        .liquid-blob {
+        .blob {
             position: absolute;
-            background: radial-gradient(circle, var(--accent-blue) 0%, transparent 70%);
             border-radius: 50%;
-            animation: flow 20s infinite alternate ease-in-out;
+            background: radial-gradient(circle, var(--accent-blue) 0%, transparent 70%);
+            animation: move 25s infinite alternate ease-in-out;
         }
 
-        .blob-1 { width: 600px; height: 600px; bottom: 0; left: 10%; opacity: 0.4; }
-        .blob-2 { width: 500px; height: 500px; bottom: 10%; right: 10%; background: radial-gradient(circle, #2c3e50 0%, transparent 70%); animation-delay: -5s; }
-        .blob-3 { width: 400px; height: 400px; bottom: -5%; left: 40%; background: radial-gradient(circle, #34495e 0%, transparent 70%); animation-delay: -10s; }
+        .blob-1 { width: 800px; height: 800px; bottom: 0; left: -10%; opacity: 0.3; }
+        .blob-2 { width: 600px; height: 600px; bottom: 10%; right: 0; background: radial-gradient(circle, #2c3e50 0%, transparent 70%); animation-delay: -5s; }
+        .blob-3 { width: 500px; height: 500px; bottom: -5%; left: 30%; background: radial-gradient(circle, #1a2a6c 0%, transparent 70%); animation-delay: -10s; }
 
-        @keyframes flow {
-            0% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(5%, -10%) scale(1.1); }
-            66% { transform: translate(-5%, -5%) scale(0.9); }
-            100% { transform: translate(0, 0) scale(1); }
+        @keyframes move {
+            0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+            50% { transform: translate(10%, -15%) scale(1.1) rotate(10deg); }
+            100% { transform: translate(-5%, 5%) scale(0.9) rotate(-10deg); }
         }
 
-        /* --- 导航 --- */
+        /* --- 2. 导航与布局 --- */
         nav {
-            padding: 40px 60px;
+            padding: 50px 80px;
             display: flex;
             justify-content: space-between;
-            align-items: center;
             font-family: 'Space Mono', monospace;
-            font-size: 13px;
-            letter-spacing: 3px;
-            text-transform: uppercase;
+            font-size: 14px;
+            letter-spacing: 2px;
+            z-index: 10;
         }
 
         .nav-links a {
@@ -93,81 +87,76 @@
 
         .nav-links a:hover { color: var(--accent-blue); }
 
-        /* --- 英雄区排版 --- */
+        /* --- 3. 核心英雄区 --- */
         .hero {
-            min-height: 80vh;
+            min-height: 85vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             padding: 0 10%;
-            position: relative;
         }
 
-        .type-intro {
+        .typing-box {
             font-family: 'Space Mono', monospace;
             color: var(--accent-blue);
+            font-size: 1.2rem;
             margin-bottom: 20px;
-            font-size: 1.1rem;
             min-height: 1.5em;
         }
 
         .hero-title {
-            font-size: clamp(2.5rem, 8vw, 6rem);
+            font-size: clamp(2.5rem, 8vw, 6.5rem);
             font-weight: 900;
-            line-height: 1.1;
-            max-width: 1000px;
-            margin-bottom: 30px;
-            letter-spacing: -3px;
+            line-height: 1.05;
+            letter-spacing: -4px;
+            margin-bottom: 40px;
         }
 
-        /* --- “失焦” 交互效果 --- */
+        /* --- “失焦” 毛刺交互 --- */
         .out-of-focus {
+            display: inline-block;
             color: var(--accent-blue);
             font-style: italic;
-            display: inline-block;
-            transition: 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-            cursor: pointer;
+            transition: 0.3s ease;
             position: relative;
         }
 
         .hero-title:hover .out-of-focus {
-            animation: glitch 0.3s infinite;
-            filter: blur(2px);
+            filter: blur(3px);
+            animation: glitch 0.2s infinite;
             text-shadow: 
-                2px 0 #ff0055, 
-                -2px 0 #00ff95,
-                0 0 15px rgba(74, 144, 226, 0.5);
+                3px 0 #ff0055, 
+                -3px 0 #00ff95,
+                0 0 20px rgba(74, 144, 226, 0.4);
         }
 
         @keyframes glitch {
             0% { transform: translate(0); }
-            20% { transform: translate(-2px, 2px); }
-            40% { transform: translate(-2px, -2px); }
-            60% { transform: translate(2px, 2px); }
-            80% { transform: translate(2px, -2px); }
+            25% { transform: translate(-3px, 1px); }
+            50% { transform: translate(2px, -2px); }
+            75% { transform: translate(-1px, 2px); }
             100% { transform: translate(0); }
         }
 
         .hero-sub {
-            font-size: 1.2rem;
+            max-width: 550px;
             color: var(--text-dim);
-            max-width: 500px;
+            font-size: 1.1rem;
             font-weight: 300;
+            line-height: 1.8;
         }
 
-        /* --- 播放器模块 --- */
-        .projects {
-            padding: 100px 10%;
-        }
+        /* --- 4. 极简播放器 --- */
+        .projects { padding: 100px 10%; }
 
         .glass-player {
             background: var(--glass);
-            backdrop-filter: blur(20px);
+            backdrop-filter: blur(25px);
             border: 1px solid var(--border);
             border-radius: 40px;
             padding: 60px;
-            max-width: 700px;
-            box-shadow: 0 40px 100px rgba(0,0,0,0.5);
+            max-width: 800px;
+            box-shadow: 0 50px 100px rgba(0,0,0,0.6);
         }
 
         .player-header {
@@ -179,72 +168,70 @@
             letter-spacing: 2px;
         }
 
-        .status-box { color: var(--accent-blue); }
         .dot {
             display: inline-block;
             width: 8px; height: 8px;
             background: var(--accent-blue);
             border-radius: 50%;
-            margin-right: 8px;
-            box-shadow: 0 0 10px var(--accent-blue);
+            margin-right: 10px;
+            box-shadow: 0 0 15px var(--accent-blue);
             animation: pulse 2s infinite;
         }
 
-        @keyframes pulse { 50% { opacity: 0.3; } }
+        @keyframes pulse { 50% { opacity: 0.2; } }
 
         audio {
             width: 100%;
             margin: 30px 0;
             filter: invert(1) hue-rotate(180deg) brightness(1.5);
-            opacity: 0.4;
+            opacity: 0.3;
+            transition: 0.5s;
         }
 
-        .upload-area {
-            text-align: center;
-            margin-top: 20px;
-        }
+        audio:hover { opacity: 0.7; }
 
         .upload-btn {
             display: inline-block;
-            padding: 20px 40px;
+            padding: 22px 45px;
             border: 1px solid var(--accent-blue);
             color: var(--accent-blue);
             text-decoration: none;
             border-radius: 100px;
             font-weight: 600;
-            transition: 0.4s;
+            letter-spacing: 1px;
+            transition: 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
             cursor: pointer;
         }
 
         .upload-btn:hover {
             background: var(--accent-blue);
             color: white;
-            box-shadow: 0 0 30px rgba(74, 144, 226, 0.4);
+            box-shadow: 0 0 40px rgba(74, 144, 226, 0.4);
+            transform: translateY(-5px);
         }
 
-        /* --- 跑马灯 --- */
+        /* --- 5. 滚动跑马灯 --- */
         .marquee {
             border-top: 1px solid var(--border);
             border-bottom: 1px solid var(--border);
-            padding: 30px 0;
+            padding: 40px 0;
             overflow: hidden;
-            margin: 100px 0;
+            background: rgba(255,255,255,0.01);
         }
 
         .marquee-track {
             display: flex;
             width: 200%;
-            animation: scroll 40s linear infinite;
+            animation: scroll 30s linear infinite;
         }
 
         .marquee span {
-            font-size: 80px;
+            font-size: 100px;
             font-weight: 900;
-            text-transform: uppercase;
             color: transparent;
             -webkit-text-stroke: 1px rgba(255,255,255,0.05);
             margin-right: 100px;
-            font-family: 'Space Mono', monospace;
+            text-transform: uppercase;
         }
 
         @keyframes scroll {
@@ -254,112 +241,4 @@
 
         @media (max-width: 768px) {
             nav { padding: 30px; }
-            .hero-title { font-size: 3rem; }
-            .glass-player { padding: 30px; }
-        }
-    </style>
-</head>
-<body>
-    <div class="grain-overlay"></div>
-
-    <div class="liquid-container">
-        <div class="liquid-blob blob-1"></div>
-        <div class="liquid-blob blob-2"></div>
-        <div class="liquid-blob blob-3"></div>
-    </div>
-
-    <nav>
-        <div class="nav-brand">blurryspot_</div>
-        <div class="nav-links">
-            <a href="#">MUSIC</a>
-            <a href="#projects">ARCHIVE</a>
-        </div>
-    </nav>
-
-    <main>
-        <section class="hero">
-            <div class="type-intro">
-                <span id="typing"></span><span class="cursor">_</span>
-            </div>
-            <h1 class="hero-title">
-                我正在捕捉<span class="out-of-focus">失焦</span>的声音。
-            </h1>
-            <p class="hero-sub">
-                一名独立音乐人。在噪音的边缘寻找颗粒感，将破碎的情绪重新编码。
-            </p>
-        </section>
-
-        <div class="marquee">
-            <div class="marquee-track">
-                <span>blurry vibes</span>
-                <span>ambient noise</span>
-                <span>captured signals</span>
-                <span>lo-fi textures</span>
-            </div>
-        </div>
-
-        <section id="projects" class="projects">
-            <div class="glass-player">
-                <div class="player-header">
-                    <div class="status-box">
-                        <span class="dot"></span> SIGNAL DETECTED
-                    </div>
-                    <span class="track-display">WAITING FOR SOUND FRAGMENTS...</span>
-                </div>
-                
-                <audio id="main-audio" controls></audio>
-
-                <div class="upload-area">
-                    <input type="file" id="audio-input" accept="audio/*" hidden>
-                    <label for="audio-input" class="upload-btn">
-                        UPLOAD FRAGMENT / 载入碎片
-                    </label>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <script>
-        // 1. 打字机效果逻辑
-        const introText = "Initializing project: blurryspot...";
-        let charIndex = 0;
-        
-        function typeWriter() {
-            if (charIndex < introText.length) {
-                document.getElementById("typing").innerHTML += introText.charAt(charIndex);
-                charIndex++;
-                setTimeout(typeWriter, 80);
-            }
-        }
-
-        // 2. 音频交互
-        const input = document.getElementById('audio-input');
-        const audio = document.getElementById('main-audio');
-        const display = document.querySelector('.track-display');
-
-        input.addEventListener('change', function() {
-            const file = this.files[0];
-            if(file) {
-                const url = URL.createObjectURL(file);
-                audio.src = url;
-                display.innerText = file.name.toUpperCase();
-                audio.play();
-                
-                // 播放时让背景液体动得更快
-                document.querySelectorAll('.liquid-blob').forEach(blob => {
-                    blob.style.animationDuration = '8s';
-                });
-            }
-        });
-
-        // 停止播放时恢复背景速度
-        audio.onpause = () => {
-            document.querySelectorAll('.liquid-blob').forEach(blob => {
-                blob.style.animationDuration = '20s';
-            });
-        };
-
-        window.onload = typeWriter;
-    </script>
-</body>
-</html>
+            .hero-title {
