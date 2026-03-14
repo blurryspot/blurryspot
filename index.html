@@ -3,22 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>blurryspot | drifting archive</title>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Mono&family=Inter:wght@400;900&display=swap" rel="stylesheet">
+    <title>blurryspot | archive</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono&family=Inter:wght@300;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="grain-overlay"></div>
+    
     <div class="grid-floor"></div>
 
-    <div class="liquid-bg">
-        <div class="blob blob-1"></div>
-        <div class="blob blob-2"></div>
-        <div class="blob blob-3"></div>
+    <div class="ocean-bg">
+        <div class="fluid fluid-1"></div>
+        <div class="fluid fluid-2"></div>
     </div>
 
     <nav>
-        <div class="nav-brand">BLURRYSPOT_V3.0</div>
+        <div class="nav-brand">BLURRYSPOT_STUDIO</div>
         <div class="nav-links">
             <a href="https://music.163.com/" target="_blank">MUSIC</a>
             <a href="#archive">ARCHIVE</a>
@@ -27,46 +27,51 @@
 
     <main>
         <section class="hero">
-            <span class="acid-star star-1">✦</span>
-            <span class="acid-star star-2">✦</span>
-
-            <div class="avatar-container">
-                <div class="avatar-ring"></div>
+            <div class="avatar-module">
+                <div class="avatar-orbit"></div>
                 <img src="avatar.png" alt="blurryspot" class="user-avatar">
             </div>
 
-            <div class="typing-area">
+            <div class="typing-container">
                 <span id="typing"></span><span class="cursor">_</span>
             </div>
             
-            <h1 class="hero-title">捕捉<span class="out-of-focus">失焦</span>的声音</h1>
-            <div class="hero-tag">DRIFTING DRAFTING_ARCHIVE</div>
+            <h1 class="hero-title">捕捉<span class="blur-text">失焦</span>的声音</h1>
+            
+            <div class="status-tag">DRIFTING_DRAFTING</div>
         </section>
 
-        <div class="marquee">
-            <div class="marquee-track">
-                <span>drifting drafting_...</span>
-                <span>drifting drafting_...</span>
-                <span>drifting drafting_...</span>
-                <span>drifting drafting_...</span>
+        <div class="marquee-strip">
+            <div class="marquee-content">
+                <span>drifting drafting_</span>
+                <span>drifting drafting_</span>
+                <span>drifting drafting_</span>
+                <span>drifting drafting_</span>
             </div>
         </div>
 
         <section id="archive" class="projects">
-            <div class="glass-player">
-                <div class="player-header">
-                    <div class="status-box"><span class="status-dot"></span> SIGNAL: ACTIVE</div>
-                    <span id="track-name">READY TO CAPTURE...</span>
+            <div class="glass-module">
+                <div class="module-header">
+                    <div class="signal-indicator">
+                        <span class="dot"></span> SIGNAL STRENGTH: OPTIMAL
+                    </div>
+                    <span id="track-name">WAITING FOR INPUT...</span>
                 </div>
+                
                 <audio id="main-audio" controls></audio>
-                <div class="controls-ui">
+
+                <div class="upload-zone">
                     <input type="file" id="audio-upload" accept="audio/*" hidden>
-                    <label for="audio-upload" class="upload-btn">LOAD SOUND FRAGMENT</label>
+                    <label for="audio-upload" class="custom-button">
+                        UPLOAD SIGNAL FRAGMENT
+                    </label>
                 </div>
-                <div class="legal">© 2026 BLURRYSPOT. ALL FRAGMENTS DRIFTING.</div>
+                <div class="footer-note">© 2026 BLURRYSPOT. ALL SIGNALS DRIFTING.</div>
             </div>
         </section>
     </main>
+
     <script src="script.js"></script>
 </body>
 </html>
