@@ -3,12 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>blurryspot | my voices</title>
+    <title>blurryspot | acid archive</title>
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono&family=Inter:wght@300;400;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="grain-overlay"></div>
+    
+    <div class="grid-floor"></div>
 
     <div class="liquid-bg">
         <div class="blob blob-1"></div>
@@ -17,7 +19,7 @@
     </div>
 
     <nav>
-        <div class="nav-brand">blurryspot_</div>
+        <div class="nav-brand">BLURRYSPOT_V3.0</div>
         <div class="nav-links">
             <a href="https://music.163.com/" target="_blank">MUSIC</a>
             <a href="#archive">ARCHIVE</a>
@@ -26,24 +28,32 @@
 
     <main>
         <section class="hero">
+            <span class="acid-star star-1">✦</span>
+            <span class="acid-star star-2">✦</span>
+
+            <div class="avatar-wrapper">
+                <div class="avatar-ring"></div>
+                <img src="avatar.jpg" alt="blurryspot" class="user-avatar">
+            </div>
+
             <div class="typing-area">
                 <span id="typing"></span><span class="cursor">_</span>
             </div>
+            
             <h1 class="hero-title">
-                我正在捕捉<span class="out-of-focus">失焦</span>的声音。
+                捕捉<span class="out-of-focus">失焦</span>的声音
             </h1>
-            <p class="hero-sub">
-                独立音乐人
-            </p>
+            
+            <div class="hero-tag">RETRO-FUTURIST ARCHIVE</div>
         </section>
 
         <div class="marquee">
             <div class="marquee-track">
                 <span>blurry sounds</span>
+                <span>acid graphics</span>
                 <span>ambient textures</span>
                 <span>captured signals</span>
                 <span>blurry sounds</span>
-                <span>ambient textures</span>
             </div>
         </div>
 
@@ -51,7 +61,7 @@
             <div class="glass-player">
                 <div class="player-header">
                     <div class="status-box">
-                        <span class="status-dot"></span> SIGNAL STRENGTH: ACTIVE
+                        <span class="status-dot"></span> SIGNAL STRENGTH: OPTIMAL
                     </div>
                     <span id="track-name">IDLE: WAITING FOR FRAGMENT...</span>
                 </div>
@@ -61,10 +71,10 @@
                 <div class="controls-ui">
                     <input type="file" id="audio-upload" accept="audio/*" hidden>
                     <label for="audio-upload" class="upload-btn">
-                        + LOAD SOUND FRAGMENT / 载入声音碎片
+                        LOAD FRAGMENT / 载入声音碎片
                     </label>
                 </div>
-                <div class="legal">© 2026 blurryspot. All audio fragments reserved.</div>
+                <div class="legal">© 2026 BLURRYSPOT. ALL SIGNALS CAPTURED.</div>
             </div>
         </section>
     </main>
