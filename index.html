@@ -9,9 +9,7 @@
 </head>
 <body>
     <div class="grain-overlay"></div>
-    
     <div class="grid-floor"></div>
-
     <div class="ocean-bg">
         <div class="fluid fluid-1"></div>
         <div class="fluid fluid-2"></div>
@@ -31,14 +29,32 @@
                 <div class="avatar-orbit"></div>
                 <img src="avatar.png" alt="blurryspot" class="user-avatar">
             </div>
-
             <div class="typing-container">
                 <span id="typing"></span><span class="cursor">_</span>
             </div>
-            
             <h1 class="hero-title">捕捉<span class="blur-text">失焦</span>的声音</h1>
-            
             <div class="status-tag">DRIFTING_DRAFTING</div>
+        </section>
+
+        <section class="work-grid">
+            <div class="grid-container">
+                <div class="grid-item" data-src="audio1.mp3">
+                    <img src="cover1.jpg" alt="Fragment 01">
+                    <div class="item-ripple"></div>
+                </div>
+                <div class="grid-item tall" data-src="audio2.mp3">
+                    <img src="cover2.jpg" alt="Fragment 02">
+                    <div class="item-ripple"></div>
+                </div>
+                <div class="grid-item" data-src="audio3.mp3">
+                    <img src="cover3.jpg" alt="Fragment 03">
+                    <div class="item-ripple"></div>
+                </div>
+                <div class="grid-item wide" data-src="audio4.mp3">
+                    <img src="cover4.jpg" alt="Fragment 04">
+                    <div class="item-ripple"></div>
+                </div>
+            </div>
         </section>
 
         <div class="marquee-strip">
@@ -56,7 +72,7 @@
                     <div class="signal-indicator">
                         <span class="dot"></span> SIGNAL STRENGTH: OPTIMAL
                     </div>
-                    <span id="track-name">WAITING FOR INPUT...</span>
+                    <span id="track-name">SELECT A FRAGMENT FROM ABOVE...</span>
                 </div>
                 
                 <audio id="main-audio" controls></audio>
@@ -64,14 +80,16 @@
                 <div class="upload-zone">
                     <input type="file" id="audio-upload" accept="audio/*" hidden>
                     <label for="audio-upload" class="custom-button">
-                        UPLOAD SIGNAL FRAGMENT
+                        OR UPLOAD LOCAL FRAGMENT
                     </label>
                 </div>
                 <div class="footer-note">© 2026 BLURRYSPOT. ALL SIGNALS DRIFTING.</div>
             </div>
         </section>
     </main>
-
+    <script src="script.js"></script>
+</body>
+</html>
     <script src="script.js"></script>
 </body>
 </html>
