@@ -1,29 +1,32 @@
-// 1. 打字机逻辑
+// 1. 打字機內容更新
 const introText = "Hi! I'm blurryspot";
 let n = 0;
-const target = document.getElementById("typing");
+const typingTarget = document.getElementById("typing");
 
-function type() {
+function typeWriter() {
     if (n < introText.length) {
-        target.innerHTML += introText.charAt(n);
+        typingTarget.innerHTML += introText.charAt(n);
         n++;
-        setTimeout(type, Math.random() * 80 + 40);
+        setTimeout(typeWriter, Math.random() * 70 + 30);
     }
 }
 
-// 2. 音频处理逻辑
+// 2. 音頻上傳交互
 const audioInput = document.getElementById('audio-upload');
 const player = document.getElementById('main-audio');
-const trackName = document.getElementById('track-name');
+const trackStatus = document.getElementById('track-name');
 
 audioInput.addEventListener('change', (e) => {
     const file = e.target.files[0];
     if (file) {
         player.src = URL.createObjectURL(file);
-        trackName.innerText = "CAPTURED: " + file.name.toUpperCase();
-        trackName.style.color = "var(--accent-pink)";
+        trackStatus.innerText = "CAPTURED: " + file.name.toUpperCase();
+        trackStatus.style.color = "var(--accent-pink)";
         player.play();
+        
+        // 增加背景流速感
+        document.querySelectorAll('.blob').forEach(b => b.style.animationDuration = '10s');
     }
 });
 
-window.onload = type;
+window.onload = typeWriter;
