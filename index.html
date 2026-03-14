@@ -3,20 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>blurryspot | archive</title>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Mono&family=Inter:wght@300;900&display=swap" rel="stylesheet">
+    <title>blurryspot | deep archive</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;900&family=Space+Mono&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="grain-overlay"></div>
     <div class="grid-floor"></div>
-    <div class="ocean-bg">
-        <div class="fluid fluid-1"></div>
-        <div class="fluid fluid-2"></div>
-    </div>
+    <div class="ocean-gradient"></div>
 
     <nav>
-        <div class="nav-brand">BLURRYSPOT_STUDIO</div>
+        <div class="nav-brand">BLURRYSPOT</div>
         <div class="nav-links">
             <a href="https://music.163.com/" target="_blank">MUSIC</a>
             <a href="#archive">ARCHIVE</a>
@@ -25,40 +22,40 @@
 
     <main>
         <section class="hero">
-            <div class="avatar-module">
-                <div class="avatar-orbit"></div>
-                <img src="avatar.png" alt="blurryspot" class="user-avatar">
-            </div>
-            <div class="typing-container">
-                <span id="typing"></span><span class="cursor">_</span>
-            </div>
-            <h1 class="hero-title">捕捉<span class="blur-text">失焦</span>的声音</h1>
-            <div class="status-tag">DRIFTING_DRAFTING</div>
-        </section>
+            <div class="hero-content">
+                <div class="avatar-minimal">
+                    <img src="avatar.png" alt="blurryspot">
+                    <div class="orbit"></div>
+                </div>
 
-        <section class="work-grid">
-            <div class="grid-container">
-                <div class="grid-item" data-src="audio1.mp3">
-                    <img src="cover1.jpg" alt="Fragment 01">
-                    <div class="item-ripple"></div>
+                <div class="typing-container">
+                    <span id="typing"></span><span class="cursor">|</span>
                 </div>
-                <div class="grid-item tall" data-src="audio2.mp3">
-                    <img src="cover2.jpg" alt="Fragment 02">
-                    <div class="item-ripple"></div>
-                </div>
-                <div class="grid-item" data-src="audio3.mp3">
-                    <img src="cover3.jpg" alt="Fragment 03">
-                    <div class="item-ripple"></div>
-                </div>
-                <div class="grid-item wide" data-src="audio4.mp3">
-                    <img src="cover4.jpg" alt="Fragment 04">
-                    <div class="item-ripple"></div>
-                </div>
+                
+                <h1 class="hero-title">捕捉<span class="focus-text">失焦</span>的声音</h1>
+                <p class="hero-motto">drifting drafting_</p>
             </div>
         </section>
 
-        <div class="marquee-strip">
-            <div class="marquee-content">
+        <section class="signal-archives">
+            <div class="archive-grid">
+                <div class="archive-item" data-audio="audio1.mp3">
+                    <img src="cover1.jpg" alt="SIGNAL_01">
+                </div>
+                <div class="archive-item" data-audio="audio2.mp3">
+                    <img src="cover2.jpg" alt="SIGNAL_02">
+                </div>
+                <div class="archive-item" data-audio="audio3.mp3">
+                    <img src="cover3.jpg" alt="SIGNAL_03">
+                </div>
+                <div class="archive-item" data-audio="audio4.mp3">
+                    <img src="cover4.jpg" alt="SIGNAL_04">
+                </div>
+            </div>
+        </section>
+
+        <div class="marquee-simple">
+            <div class="marquee-track">
                 <span>drifting drafting_</span>
                 <span>drifting drafting_</span>
                 <span>drifting drafting_</span>
@@ -66,30 +63,22 @@
             </div>
         </div>
 
-        <section id="archive" class="projects">
-            <div class="glass-module">
-                <div class="module-header">
-                    <div class="signal-indicator">
-                        <span class="dot"></span> SIGNAL STRENGTH: OPTIMAL
-                    </div>
-                    <span id="track-name">SELECT A FRAGMENT FROM ABOVE...</span>
+        <section id="archive" class="player-section">
+            <div class="player-container">
+                <div class="player-meta">
+                    <div class="signal-dot"></div>
+                    <span id="track-name">SILENCE / 等待信号载入</span>
                 </div>
                 
                 <audio id="main-audio" controls></audio>
 
-                <div class="upload-zone">
+                <div class="upload-area">
                     <input type="file" id="audio-upload" accept="audio/*" hidden>
-                    <label for="audio-upload" class="custom-button">
-                        OR UPLOAD LOCAL FRAGMENT
-                    </label>
+                    <label for="audio-upload" class="minimal-btn">LOAD FRAGMENT</label>
                 </div>
-                <div class="footer-note">© 2026 BLURRYSPOT. ALL SIGNALS DRIFTING.</div>
             </div>
         </section>
     </main>
-    <script src="script.js"></script>
-</body>
-</html>
     <script src="script.js"></script>
 </body>
 </html>
