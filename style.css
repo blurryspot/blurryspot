@@ -1,19 +1,29 @@
 :root {
-    --bg-color: #050505;
-    --accent-acid: #bfff00; 
-    --accent-pink: #ff00de; 
+    --bg-color: #002FA7; /* 克莱因蓝 */
+    --accent-acid: #bfff00; /* 酸性绿 */
+    --accent-pink: #ff00de; /* Y2K 粉 */
     --text-main: #ffffff;
     --border: rgba(191, 255, 0, 0.3);
 }
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
     background-color: var(--bg-color);
     color: var(--text-main);
     font-family: 'Inter', sans-serif;
-    margin: 0; overflow-x: hidden;
+    overflow-x: hidden;
 }
 
-/* Y2K Grid */
+/* 胶片颗粒 */
+.grain-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: url('https://grainy-gradients.vercel.app/noise.svg');
+    opacity: 0.1; pointer-events: none; z-index: 1000;
+}
+
+/* Y2K Grid Floor */
 .grid-floor {
     position: fixed; bottom: 0; width: 100%; height: 50%;
     background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px);
@@ -22,27 +32,55 @@ body {
     transform-origin: bottom; opacity: 0.2; z-index: -1;
 }
 
+/* 海洋流动感背景 */
+.liquid-bg {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    filter: blur(80px); opacity: 0.4; z-index: -2;
+}
+.blob {
+    position: absolute; border-radius: 50%;
+    background: radial-gradient(circle, #001f66 0%, transparent 70%);
+    animation: move 20s infinite alternate ease-in-out;
+}
+.blob-1 { width: 800px; height: 800px; bottom: -10%; left: -10%; }
+.blob-2 { width: 600px; height: 600px; top: 10%; right: 10%; background: radial-gradient(circle, var(--accent-pink) 0%, transparent 70%); animation-delay: -5s; }
+
+@keyframes move { 
+    0% { transform: translate(0, 0) scale(1); } 
+    100% { transform: translate(10%, -10%) scale(1.2); } 
+}
+
+/* Hero Section */
 .hero { min-height: 90vh; display: flex; flex-direction: column; justify-content: center; padding: 0 10%; position: relative; }
 
-.avatar-wrapper { position: relative; width: 120px; height: 120px; margin-bottom: 20px; }
+.avatar-wrapper { position: relative; width: 140px; height: 140px; margin-bottom: 30px; }
 .avatar-ring { position: absolute; top: -5px; left: -5px; right: -5px; bottom: -5px; border: 2px solid var(--accent-acid); border-radius: 50%; animation: spin 10s linear infinite; }
-.user-avatar { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; box-shadow: 0 0 20px var(--accent-acid); }
+.user-avatar { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 4px solid var(--bg-color); box-shadow: 0 0 30px var(--accent-acid); }
 
 @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
-.hero-title { font-size: 4rem; font-weight: 900; -webkit-text-stroke: 1px var(--accent-acid); color: transparent; text-transform: uppercase; }
+.hero-title { font-size: clamp(2.5rem, 8vw, 5rem); font-weight: 900; -webkit-text-stroke: 1px var(--accent-acid); color: transparent; text-transform: uppercase; }
 .hero-tag { background: var(--accent-pink); color: #000; padding: 5px 15px; font-weight: 900; transform: skew(-15deg); width: fit-content; margin-top: 15px; }
 
+/* 跑马灯 */
 .marquee { background: var(--accent-acid); color: #000; padding: 15px 0; overflow: hidden; white-space: nowrap; }
-.marquee-track { display: inline-block; animation: scroll 20s linear infinite; font-weight: 900; font-size: 1.5rem; }
+.marquee-track { display: inline-block; animation: scroll 25s linear infinite; font-weight: 900; font-size: 1.5rem; }
 
 @keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
-.glass-player { background: rgba(255,255,255,0.05); backdrop-filter: blur(10px); border: 2px solid var(--accent-acid); padding: 30px; border-radius: 15px; box-shadow: 10px 10px 0 var(--accent-pink); margin: 50px auto; max-width: 600px; }
-.upload-btn { display: block; background: var(--accent-acid); color: #000; text-align: center; padding: 15px; font-weight: 900; cursor: pointer; transform: skew(-5deg); transition: 0.3s; }
-.upload-btn:hover { background: var(--accent-pink); box-shadow: 5px 5px 0 var(--accent-acid); }
+/* 播放器容器 */
+.glass-player { 
+    background: rgba(255,255,255,0.05); backdrop-filter: blur(20px); 
+    border: 2px solid var(--accent-acid); padding: 40px; border-radius: 20px; 
+    box-shadow: 12px 12px 0 var(--accent-pink); max-width: 600px;
+}
+.upload-btn { 
+    display: block; background: var(--accent-acid); color: #000; text-align: center; 
+    padding: 15px; font-weight: 900; cursor: pointer; transform: skew(-5deg); transition: 0.3s; 
+}
+.upload-btn:hover { background: #fff; box-shadow: 5px 5px 0 var(--accent-pink); }
 
-.acid-star { position: absolute; font-size: 2rem; color: var(--accent-acid); animation: blink 1s infinite alternate; }
+.acid-star { position: absolute; font-size: 2.5rem; color: var(--accent-acid); animation: blink 1.5s infinite alternate; }
 .star-1 { top: 15%; right: 20%; }
 .star-2 { bottom: 25%; left: 15%; color: var(--accent-pink); }
-@keyframes blink { from { opacity: 0.3; transform: scale(0.8); } to { opacity: 1; transform: scale(1.1); } }
+@keyframes blink { from { opacity: 0.2; transform: scale(0.8); } to { opacity: 1; transform: scale(1.1); } }
